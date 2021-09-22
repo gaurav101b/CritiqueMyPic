@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Post</title>
+</head>
+
+<body>
+    <h1>Edit your Post</h1>
+
+    <form action="/posts/<%= post._id %>?_method=PUT" method="POST">
+        <div>
+            <label for="title"> Title</label>
+            <input type="text" id="title" name='post[title]' value='<%= post.title %> '>
+        </div>
+        <div>
+            <label for="description"> Description</label>
+            <input type="text" id="description" name='post[description]' value=' <%=post.description %>'>
+        </div>
+        <button> Confirm Changes </button>
+    </form>
+
+    <footer>
+        <a href="/posts/<%= post._id %> ">Return to Post</a>
+    </footer>
+
+</body>
+
+</html>
