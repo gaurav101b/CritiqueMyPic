@@ -18,7 +18,12 @@ db.once('open', () => {
 const seedDB = async () => {
     await Post.deleteMany({});
     for (let i = 0; i < 50; i++) {
-        const p = new Post({ title: RandomWord.getRandomWord() });
+        const p = new Post({
+            title: RandomWord.getRandomWord(),
+            image: 'https://source.unsplash.com/random',
+            // image: 'https://picsum.photos/500/500',
+            description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque, laudantium reiciendis necessitatibus deserunt dicta odio similique cumque accusantium veniam minus! Vero suscipit doloribus fugit nemo mollitia magni ex cum labore.'
+        });
         await p.save();
     }
 }
