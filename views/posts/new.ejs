@@ -4,25 +4,54 @@
         <h1 class="text-center">Create New Post</h1>
 
         <div class="col-6 offset-3">
-            <form action="/posts" method="POST">
+            <form action="/posts" method="POST" novalidate class="needs-validation">
                 <div class="mb-3">
                     <label class="form-label" for="title"> Title</label>
-                    <input class="form-control" type="text" id="title" name='post[title]'>
+                    <input class="form-control" type="text" id="title" name='post[title]' required>
+                    <div class="valid-feedback">
+                        Looks Good ｡◕‿◕｡
+                    </div>
+                    <div class="invalid-feedback">
+                        Please choose a Title. ◔̯◔
+                    </div>
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="image"> Image URL</label>
-                    <input class="form-control" type="text" id="image" name='post[image]'>
+                    <input class="form-control" type="text" id="image" name='post[image]' required>
+                    <div class="valid-feedback">
+                        Looks Good ｡◕‿◕｡
+                    </div>
+                    <div class="invalid-feedback">
+                        Please add a Image. ಠ~ಠ
+                    </div>
                 </div>
+
                 <div class="mb-3">
                     <label class="form-label" for="info"> Info</label>
-                    <br>
-                    <!-- <span class="input-group-text" id="info">&#128247;</span> -->
-                    <input type="text" class="form-control" name='post[info]' id='info'
-                        placeholder="Enter Camera and EXIF data">
+
+                    <div class="input-group">
+                        <span class="input-group-text" id="info">&#128247;</span>
+                        <input type="text" class="form-control" name='post[info]' id='info'
+                            placeholder="Enter Camera and EXIF data" required>
+                        <div class="valid-feedback">
+                            Looks Good ｡◕‿◕｡
+                        </div>
+                        <div class="invalid-feedback">
+                            Please Enter some info about the picture. ◔̯◔
+                        </div>
+                    </div>
                 </div>
+
                 <div class="mb-3">
                     <label class="form-label" for="description"> Description</label>
-                    <textarea class="form-control" type="text" id="description" name='post[description]'></textarea>
+                    <textarea class="form-control" type="text" id="description" name='post[description]'
+                        required></textarea>
+                    <div class="valid-feedback">
+                        Looks Good ｡◕‿◕｡
+                    </div>
+                    <div class="invalid-feedback">
+                        Please Enter a description ◔̯◔
+                    </div>
                 </div>
 
                 <div class="mb-3">
