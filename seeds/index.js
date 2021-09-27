@@ -22,6 +22,10 @@ const seedDB = async () => {
             title: RandomWord.getRandomWord(),
             image: 'https://source.unsplash.com/random',
             // image: 'https://picsum.photos/500/500',
+
+            info: `ISO : ${Math.floor(Math.random() * 11) * 100}, 
+            shutter : ${Math.floor(Math.random() * 20) * 10}`,
+
             description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque, laudantium reiciendis necessitatibus deserunt dicta odio similique cumque accusantium veniam minus! Vero suscipit doloribus fugit nemo mollitia magni ex cum labore.'
         });
         await p.save();
