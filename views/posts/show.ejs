@@ -1,7 +1,7 @@
 <% layout('layouts/boilerplate') %>
 
     <div class="row">
-        <div class="col-6 offset-3">
+        <div class="col-6">
             <div class="card mb-3">
                 <img src="<%= post.image %> " alt="">
                 <div class="card-body">
@@ -30,9 +30,47 @@
                 <div class="card-footer text-muted">
                     2 days ago
                 </div>
-
             </div>
         </div>
+        <div class="col-6">
+            <h2>Leave a Review</h2>
+            <form action="/posts/<%= post._id %>/reviews " method="POST" class="mb-3 needs-validation" novalidate>
+                <div class="mb-3">
+                    <label class="form-label" for="rating">Rating</label>
+                    <input class="form-range" type="range" min="1" max="5" id="rating" name="review[rating]">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="body">Review</label>
+                    <textarea class="form-control" name="review[body]" id="body" cols="30" rows="3" required></textarea>
+                    <div class="valid-feedback">
+                        Looks Good ｡◕‿◕｡
+                    </div>
+                    <div class="invalid-feedback">
+                        Please Enter a review. ◔̯◔
+                    </div>
+                </div>
+                <button class="btn btn-success">Submit</button>
+            </form>
+
+            <% for(let review of post.reviews){ %>
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            rating : <%= review.rating %>
+                        </h5>
+                        <p class="card-text">
+                            review : <%=review.body %>
+                        </p>
+                        <form class="d-inline" action="/posts/<%= post._id %>/reviews/<%= review._id %>?_method=DELETE "
+                            method="POST">
+                            <button class="btn btn-sm btn-danger">Delete Review</button>
+                        </form>
+                    </div>
+                </div>
+                <% } %>
+        </div>
+
     </div>
 
     <footer>

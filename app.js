@@ -7,8 +7,9 @@ const methodOverride = require('method-override');
 
 const catchAsync = require('./utils/catchAsync');
 const ExpressError = require('./utils/ExpressError');
-const { postSchema } = require('./schemas.js')
+const { postSchema, reviewSchema } = require('./schemas.js')
 const Post = require('./models/post')
+const Review = require('./models/review')
 
 mongoose.connect('mongodb://localhost:27017/critique-pic', {
     // useNewUrlParser: true,
@@ -44,6 +45,17 @@ const validatePost = (req, res, next) => {
     }
 }
 
+const validateReview = (req, res, next) => {
+    const { error } = reviewSchema.validate(req.body);
+    if (error) {
+        const msg = error.details.map(e => e.message).join(', ');
+        throw new ExpressError(msg, 400)
+    }
+    else {
+        next();
+    }
+}
+
 
 app.get('/', (req, res) => {
     // res.send("Hi there, this is CritiqueMyPic");
@@ -69,7 +81,7 @@ app.post('/posts', validatePost, catchAsync(async (req, res) => {
 }))
 
 app.get('/posts/:id', catchAsync(async (req, res) => {
-    const post = await Post.findById(req.params.id);
+    const post = await Post.findById(req.params.id).populate('reviews');;
     res.render("posts/show", { post })
 }))
 
@@ -90,6 +102,26 @@ app.delete('/posts/:id', catchAsync(async (req, res) => {
     await Post.findByIdAndDelete(id);
     res.redirect('/posts');
 }))
+
+
+
+app.post('/posts/:id/reviews', validateReview, catchAsync(async (req, res) => {
+    const post = await Post.findById(req.params.id);
+    const review = new Review(req.body.review);
+    post.reviews.push(review);
+    await review.save();
+    await post.save();
+    res.redirect(`/posts/${post._id}`);
+}))
+
+app.delete('/posts/:id/reviews/:reviewId', catchAsync(async (req, res) => {
+    const { id, reviewId } = req.params;
+    await Post.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
+    await Review.findByIdAndDelete(reviewId);
+    res.redirect(`/posts/${id}`);
+}))
+
+
 
 app.all('*', (req, res, next) => {
     err = new ExpressError('Page not Found', 404);
