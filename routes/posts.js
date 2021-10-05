@@ -32,32 +32,42 @@ router.get('/new', (req, res) => {
 router.post('/', validatePost, catchAsync(async (req, res) => {
     // if (!req.body.post)
     //     throw new ExpressError('Invalid post data', 400);
-
+    req.flash('success', 'Successfully made a new Post!');
     const post = new Post(req.body.post);
     await post.save();
     res.redirect(`/posts/${post._id}`)
 }))
 
 router.get('/:id', catchAsync(async (req, res) => {
-    const post = await Post.findById(req.params.id).populate('reviews');;
+    const post = await Post.findById(req.params.id).populate('reviews');
+    if (!post) {
+        req.flash('error', 'Cannot find that Post!');
+        return res.redirect('/posts');
+    }
     res.render("posts/show", { post })
 }))
 
 router.get('/:id/edit', catchAsync(async (req, res) => {
     const post = await Post.findById(req.params.id);
+    if (!post) {
+        req.flash('error', 'Cannot find that Post!');
+        return res.redirect('/posts');
+    }
     res.render("posts/edit", { post })
     // res.render("posts/show", { post })
 }))
 
 router.put('/:id', validatePost, catchAsync(async (req, res) => {
     const { id } = req.params;
-    const post = await Post.findByIdAndUpdate(id, { ...req.body.post })
+    const post = await Post.findByIdAndUpdate(id, { ...req.body.post });
+    req.flash('success', 'Successfully Updated the Post!');
     res.redirect(`/posts/${post._id}`)
 }))
 
 router.delete('/:id', catchAsync(async (req, res) => {
     const { id } = req.params;
     await Post.findByIdAndDelete(id);
+    req.flash('success', 'Successfully deleted Post!');
     res.redirect('/posts');
 }))
 
