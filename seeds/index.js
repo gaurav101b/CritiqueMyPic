@@ -23,6 +23,8 @@ const seedDB = async () => {
             image: 'https://source.unsplash.com/random',
             // image: 'https://picsum.photos/500/500',
 
+            author: '615ebcb4a94303546be58ebe', //(for username : aa, password : aa )
+
             info: `ISO : ${Math.floor(Math.random() * 11) * 100}, 
             shutter : ${Math.floor(Math.random() * 20) * 10}`,
 

@@ -7,6 +7,10 @@ const PostSchema = new Schema({
     image: String,
     info: String,
     description: String,
+    author: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },
     reviews: [
         {
             type: Schema.Types.ObjectId,

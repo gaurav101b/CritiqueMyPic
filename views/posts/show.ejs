@@ -17,58 +17,73 @@
                     <li class="list-group-item text-muted">
                         <%= post.info %>
                     </li>
-                    <!-- <li class="list-group-item">A second item</li>
-                    <li class="list-group-item">A third item</li> -->
+                    <li class="list-group-item">
+                        Submitted by <b>
+                            <%= post.author.username %>
+                        </b>
+                    </li>
                 </ul>
-                <div class="card-body">
-                    <a class="card-link btn btn-info" href="/posts/<%= post._id %>/edit ">Edit</a>
-                    <form class="d-inline" action="/posts/<%= post._id %>?_method=DELETE " method="POST">
-                        <button class="btn btn-danger">Delete Post</button>
-                    </form>
-                </div>
+                <% if( currentUser && post.author.equals(currentUser._id) ){ %>
+                    <div class="card-body">
+                        <a class="card-link btn btn-info" href="/posts/<%= post._id %>/edit ">Edit</a>
+                        <form class="d-inline" action="/posts/<%= post._id %>?_method=DELETE " method="POST">
+                            <button class="btn btn-danger">Delete Post</button>
+                        </form>
+                    </div>
+                    <% } %>
 
-                <div class="card-footer text-muted">
-                    2 days ago
-                </div>
+                        <div class="card-footer text-muted">
+                            2 days ago
+                        </div>
             </div>
         </div>
         <div class="col-6">
-            <h2>Leave a Review</h2>
-            <form action="/posts/<%= post._id %>/reviews " method="POST" class="mb-3 needs-validation" novalidate>
-                <div class="mb-3">
-                    <label class="form-label" for="rating">Rating</label>
-                    <input class="form-range" type="range" min="1" max="5" id="rating" name="review[rating]">
-                </div>
+            <% if(currentUser){ %>
+                <h2>Leave a Review</h2>
+                <form action="/posts/<%= post._id %>/reviews " method="POST" class="mb-3 needs-validation" novalidate>
+                    <div class="mb-3">
+                        <label class="form-label" for="rating">Rating</label>
+                        <input class="form-range" type="range" min="1" max="5" id="rating" name="review[rating]">
+                    </div>
 
-                <div class="mb-3">
-                    <label class="form-label" for="body">Review</label>
-                    <textarea class="form-control" name="review[body]" id="body" cols="30" rows="3" required></textarea>
-                    <div class="valid-feedback">
-                        Looks Good ｡◕‿◕｡
+                    <div class="mb-3">
+                        <label class="form-label" for="body">Review</label>
+                        <textarea class="form-control" name="review[body]" id="body" cols="30" rows="3"
+                            required></textarea>
+                        <div class="valid-feedback">
+                            Looks Good ｡◕‿◕｡
+                        </div>
+                        <div class="invalid-feedback">
+                            Please Enter a review. ◔̯◔
+                        </div>
                     </div>
-                    <div class="invalid-feedback">
-                        Please Enter a review. ◔̯◔
-                    </div>
-                </div>
-                <button class="btn btn-success">Submit</button>
-            </form>
-
-            <% for(let review of post.reviews){ %>
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            rating : <%= review.rating %>
-                        </h5>
-                        <p class="card-text">
-                            review : <%=review.body %>
-                        </p>
-                        <form class="d-inline" action="/posts/<%= post._id %>/reviews/<%= review._id %>?_method=DELETE "
-                            method="POST">
-                            <button class="btn btn-sm btn-danger">Delete Review</button>
-                        </form>
-                    </div>
-                </div>
+                    <button class="btn btn-success">Submit</button>
+                </form>
                 <% } %>
+
+                    <% for(let review of post.reviews){ %>
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    rating : <%= review.rating %>
+                                </h5>
+                                <h6 class="card-subtitle mb-2 text-muted">
+                                    By <%= review.author.username %>
+                                </h6>
+                                <p class="card-text">
+                                    review : <%=review.body %>
+                                </p>
+                                <% if(currentUser && review.author.equals(currentUser._id)){ %>
+                                    <form class="d-inline"
+                                        action="/posts/<%= post._id %>/reviews/<%= review._id %>?_method=DELETE"
+                                        method="POST">
+                                        <button class="btn btn-sm btn-danger">Delete Review</button>
+                                    </form>
+                                    <% } %>
+
+                            </div>
+                        </div>
+                        <% } %>
         </div>
 
     </div>
