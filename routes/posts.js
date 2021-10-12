@@ -6,10 +6,14 @@ const catchAsync = require('../utils/catchAsync');
 // const Post = require('../models/post')
 const { isLoggedIn, isAuthor, validatePost } = require('../middleware');
 
+const multer = require('multer');
+const { storage } = require('../cloudinary')
+const upload = multer({ storage });
+
 
 router.route('/')
     .get(catchAsync(posts.index))
-    .post(isLoggedIn, validatePost, catchAsync(posts.createPost))
+    .post(isLoggedIn, upload.array('image'), validatePost, catchAsync(posts.createPost))
 
 //this route needs to be before show page, else will think 'new' is an id
 router.get('/new', isLoggedIn, posts.renderNewForm)

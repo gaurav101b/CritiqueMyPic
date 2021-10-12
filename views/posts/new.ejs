@@ -4,7 +4,7 @@
         <h1 class="text-center">Create New Post</h1>
 
         <div class="col-6 offset-3">
-            <form action="/posts" method="POST" novalidate class="needs-validation">
+            <form action="/posts" method="POST" novalidate class="needs-validation" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label class="form-label" for="title"> Title</label>
                     <input class="form-control" type="text" id="title" name='post[title]' required>
@@ -15,7 +15,9 @@
                         Please choose a Title. ◔̯◔
                     </div>
                 </div>
-                <div class="mb-3">
+
+                <input type="file" name="image" id="" multiple>
+                <!-- <div class="mb-3">
                     <label class="form-label" for="image"> Image URL</label>
                     <input class="form-control" type="text" id="image" name='post[image]' required>
                     <div class="valid-feedback">
@@ -24,7 +26,7 @@
                     <div class="invalid-feedback">
                         Please add a Image. ಠ~ಠ
                     </div>
-                </div>
+                </div> -->
 
                 <div class="mb-3">
                     <label class="form-label" for="info"> Info</label>

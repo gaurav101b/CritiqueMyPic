@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Post = require('../models/post');
+const Review = require('../models/review');
 
 const RandomWord = require('./randomWords');
 
@@ -17,6 +18,7 @@ db.once('open', () => {
 
 const seedDB = async () => {
     await Post.deleteMany({});
+    await Review.deleteMany({});
     for (let i = 0; i < 50; i++) {
         const p = new Post({
             title: RandomWord.getRandomWord(),

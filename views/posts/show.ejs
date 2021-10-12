@@ -4,38 +4,41 @@
     <div class="row">
         <div class="col-6">
             <div class="card mb-3">
-                <img src="<%= post.image %> " alt="">
-                <div class="card-body">
-                    <h5 class="card-title">
-                        <%= post.title %>
-                    </h5>
-                    <p class="card-text">
-                        <%= post.description %>
-                    </p>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <!-- ISO info -->
-                    <li class="list-group-item text-muted">
-                        <%= post.info %>
-                    </li>
-                    <li class="list-group-item">
-                        Submitted by <b>
-                            <%= post.author.username %>
-                        </b>
-                    </li>
-                </ul>
-                <% if( currentUser && post.author.equals(currentUser._id) ){ %>
-                    <div class="card-body">
-                        <a class="card-link btn btn-info" href="/posts/<%= post._id %>/edit ">Edit</a>
-                        <form class="d-inline" action="/posts/<%= post._id %>?_method=DELETE " method="POST">
-                            <button class="btn btn-danger">Delete Post</button>
-                        </form>
-                    </div>
+                <% for(let img of post.images){ %>
+                    <img src="<%= img.url %> " alt="" class="card-img-top">
                     <% } %>
 
-                        <div class="card-footer text-muted">
-                            2 days ago
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <%= post.title %>
+                            </h5>
+                            <p class="card-text">
+                                <%= post.description %>
+                            </p>
                         </div>
+                        <ul class="list-group list-group-flush">
+                            <!-- ISO info -->
+                            <li class="list-group-item text-muted">
+                                <%= post.info %>
+                            </li>
+                            <li class="list-group-item">
+                                Submitted by <b>
+                                    <%= post.author.username %>
+                                </b>
+                            </li>
+                        </ul>
+                        <% if( currentUser && post.author.equals(currentUser._id) ){ %>
+                            <div class="card-body">
+                                <a class="card-link btn btn-info" href="/posts/<%= post._id %>/edit ">Edit</a>
+                                <form class="d-inline" action="/posts/<%= post._id %>?_method=DELETE " method="POST">
+                                    <button class="btn btn-danger">Delete Post</button>
+                                </form>
+                            </div>
+                            <% } %>
+
+                                <div class="card-footer text-muted">
+                                    2 days ago
+                                </div>
             </div>
         </div>
         <div class="col-6">
