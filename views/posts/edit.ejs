@@ -4,6 +4,16 @@
         <h1 class="text-center">Edit your Post</h1>
 
         <div class="col-6 offset-3">
+            <div id="carouselExampleSlidesOnly" class="carousel slide mb-3" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <% for(let img of post.images){ %>
+                        <div class="carousel-item active">
+                            <img src="<%= img.url %> " class="d-block w-100" alt="">
+                        </div>
+                        <% } %>
+                </div>
+            </div>
+
             <form action="/posts/<%= post._id %>?_method=PUT" method="POST" novalidate class="needs-validation">
                 <div class="mb-3">
                     <label class="form-label" for="title"> Title</label>
@@ -14,17 +24,6 @@
                     </div>
                     <div class="invalid-feedback">
                         Please choose a Title. ◔̯◔
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label" for="image"> Image URL</label>
-                    <input class="form-control" type="text" id="image" name='post[image]' value='<%= post.image %>'
-                        required>
-                    <div class="valid-feedback">
-                        Looks Good ｡◕‿◕｡
-                    </div>
-                    <div class="invalid-feedback">
-                        Please add a Image. ಠ~ಠ
                     </div>
                 </div>
 

@@ -22,8 +22,13 @@ const seedDB = async () => {
     for (let i = 0; i < 50; i++) {
         const p = new Post({
             title: RandomWord.getRandomWord(),
-            image: 'https://source.unsplash.com/random',
-            // image: 'https://picsum.photos/500/500',
+            // image: 'https://source.unsplash.com/random',
+            images: [
+                {
+                    url: 'https://res.cloudinary.com/gaurav101b/image/upload/v1634106524/CritiqueMyPic/dmfkg8h4bmyxtp7xxksz.jpg',
+                    filename: 'CritiqueMyPic/dmfkg8h4bmyxtp7xxksz'
+                }
+            ],
 
             author: '615ebcb4a94303546be58ebe', //(for username : aa, password : aa )
 
