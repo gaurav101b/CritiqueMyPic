@@ -12,6 +12,8 @@ const methodOverride = require('method-override');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 // const Joi = require('joi');
+const mongoSanitize = require('express-mongo-sanitize');
+
 
 // const catchAsync = require('./utils/catchAsync');
 const ExpressError = require('./utils/ExpressError');
@@ -50,7 +52,12 @@ app.use(methodOverride('_method'));
 
 app.use(express.static(path.join(__dirname, 'public')))
 
+app.use(mongoSanitize({
+    replaceWith: '_'
+}))
+
 const sessionConfig = {
+    name: 'session',
     secret: 'NeedToChoooseABetterSecret!',
     resave: false,
     saveUninitialized: true,

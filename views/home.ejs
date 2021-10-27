@@ -1,3 +1,53 @@
-<% layout('layouts/boilerplate') %>
+<!DOCTYPE html>
+<html lang="en">
 
-    <h1>Home !! CmP</h1>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CritiqueMyPic</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="stylesheet" href="/stylesheets/home.css">
+</head>
+
+<body class="d-flex text-center text-white bg-dark">
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+        <header class="mb-auto">
+            <div>
+                <h3 class="float-md-left mb-0">CritiqueMyPic</h3>
+                <nav class="nav nav-masthead justify-content-center float-md-right">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link" href="/posts">CritiqueMyPic</a>
+                    <% if(!currentUser) { %>
+                        <a class="nav-link" href="/login">Login</a>
+                        <a class="nav-link" href="/register">Register</a>
+                        <% } else { %>
+                            <a class="nav-link" href="/logout">Logout</a>
+                            <% } %>
+                </nav>
+            </div>
+        </header>
+        <main class="px-3">
+            <h1>CritiqueMyPic</h1>
+            <p class="lead"> Welcome to CritiqueMyPic! <br> xxxx xxxxxxx xxxx xx xxxxxx xxxx xxx xxxx <br>
+                Feel free to share some of your own and comment on others!</p>
+            <a href="/posts" class="btn btn-lg btn-secondary font-weight-bold border-white bg-white">View
+                Posts</a>
+        </main>
+
+        <footer class="mt-auto text-white-50">
+            <p>&Copf;&Popf; | CritiqueMyPic 2021 | By Gaurav Barmola </p>
+        </footer>
+
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+        crossorigin="anonymous"></script>
+
+    <script src='/javascripts/validateForms.js'></script>
+</body>
+
+</html>
