@@ -52,12 +52,13 @@
             <% if(currentUser){ %>
                 <h2>Leave a Review</h2>
                 <form action="/posts/<%= post._id %>/reviews " method="POST" class="mb-3 needs-validation" novalidate>
-                    <!-- <div class="mb-3">
-                        <label class="form-label" for="rating">Rating</label>
-                        <input class="form-range" type="range" min="1" max="5" id="rating" name="review[rating]">
-                    </div> -->
+                    <!-- <div class="mb-3"> -->
+                    <!-- <label class="form-label" for="rating">Rating</label> -->
+                    <!-- <input class="form-range" type="range" min="1" max="5" id="rating" name="review[rating]"> -->
+                    <!-- </div> -->
+                    <!-- "width:0px;" -->
 
-                    <div class="">
+                    <!-- <div class="">
                         <fieldset class="starability-basic">
                             <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="0"
                                 checked aria-label="No rating." />
@@ -72,7 +73,7 @@
                             <input type="radio" id="first-rate5" name="review[rating]" value="5" />
                             <label for="first-rate5" title="Amazing">5 stars</label>
                         </fieldset>
-                    </div>
+                    </div> -->
 
                     <div class="mb-3">
                         <label class="form-label" for="body">Review: </label>
@@ -95,9 +96,9 @@
                                 <h5 class="card-title">
                                     <%= review.author.username %>
                                 </h5>
-                                <p class="starability-result" data-rating="<%= review.rating %>">
+                                <!-- <p class="starability-result" data-rating="<%= review.rating %>">
                                     Rated: <%= review.rating %> stars
-                                </p>
+                                </p> -->
                                 <!-- <h6 class="card-subtitle mb-2 text-muted">
                                     By <%= review.author.username %>
                                 </h6> -->

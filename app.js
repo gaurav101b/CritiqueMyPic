@@ -14,6 +14,7 @@ const LocalStrategy = require('passport-local');
 // const Joi = require('joi');
 const mongoSanitize = require('express-mongo-sanitize');
 
+const MongoStore = require('connect-mongo');
 
 // const catchAsync = require('./utils/catchAsync');
 const ExpressError = require('./utils/ExpressError');
@@ -27,9 +28,9 @@ const postRoutes = require('./routes/posts');
 const reviewRoutes = require('./routes/reviews');
 const userRoutes = require('./routes/users');
 
-
-
-mongoose.connect('mongodb://localhost:27017/critique-pic', {
+const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/critique-pic';
+// const dbUrl = 'mongodb://localhost:27017/critique-pic';
+mongoose.connect(dbUrl, {
     // useNewUrlParser: true,
     // useCreateIndex: true,
     // useUnifiedTopology: true
@@ -56,9 +57,24 @@ app.use(mongoSanitize({
     replaceWith: '_'
 }))
 
+const secret = process.env.SECRET || 'NeedToChoooseABetterSecret!';
+const store = new MongoStore({
+    mongoUrl: dbUrl,
+    secret,
+    touchAfter: 24 * 60 * 60
+})
+store.on('error', e => {
+    console.log("Session store error ", e);
+});
+
 const sessionConfig = {
+    store,
+    // store: MongoStore.create({
+    //     mongoUrl: dbUrl,
+    //     touchAfter: 24 * 60 * 60
+    // }),
     name: 'session',
-    secret: 'NeedToChoooseABetterSecret!',
+    secret,
     resave: false,
     saveUninitialized: true,
     cookie: {
