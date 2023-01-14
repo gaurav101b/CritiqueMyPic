@@ -29,6 +29,7 @@ const reviewRoutes = require('./routes/reviews');
 const userRoutes = require('./routes/users');
 
 const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/critique-pic';
+console.log(process.env.DB_URL);
 console.log(`Database url : ${dbUrl}`);
 // const dbUrl = 'mongodb://localhost:27017/critique-pic';
 mongoose.connect(dbUrl, {
