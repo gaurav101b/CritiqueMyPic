@@ -30,9 +30,6 @@ const userRoutes = require('./routes/users');
 
 const dbUrl = process.env.MONGODB_URI || 'mongodb://localhost:27017/critique-pic';
 
-console.log(process.env.MONGODB_URI);
-console.log(`Database url : ${dbUrl}`);
-
 // const dbUrl = 'mongodb://localhost:27017/critique-pic';
 mongoose.connect(dbUrl, {
     // useNewUrlParser: true,
